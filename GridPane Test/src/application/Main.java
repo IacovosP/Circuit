@@ -56,7 +56,6 @@ public class Main extends Application {
 						else wire.setStyle("-fx-background-color: transparent;");
 						wire.toBack();
 						//wire.setStyle("-fx-base: #b6e7c9;");
-						
 					}
 				});
 			}
