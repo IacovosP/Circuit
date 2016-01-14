@@ -160,10 +160,7 @@ public class Main extends Application {
 						else wire.setStyle("-fx-background-color: transparent;");
 						wire.toBack();
 						
-						Tooltip.install(
-							    wire,
-							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
-							);
+						
 						//wire.setStyle("-fx-base: #b6e7c9;");
 						
 					}
@@ -175,11 +172,13 @@ public class Main extends Application {
 				wire.setOnMouseEntered(new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e) {
 						currentVal = (float)batteryVal/resistorVal;
-				
-						Tooltip.install(
-							    wire,
-							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
-							);
+						if (wire.getStyle()=="-fx-background-color: green;"){
+							Tooltip.install(
+								    wire,
+								    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
+								);	
+						}
+						
 						//wire.setStyle("-fx-base: #b6e7c9;");
 						
 					}
@@ -264,6 +263,11 @@ public class Main extends Application {
 		                //content.putString(source.getText());
 		                db.setContent(content);
 		                
+		                if (target.getImage()!=square){
+		                	target.setImage(square);
+							target.setFitHeight(20);
+							target.setFitWidth(20);
+	                	}
 		                event.consume();
 		            }
 		        });
@@ -281,16 +285,14 @@ public class Main extends Application {
 	                    	/* allow for both copying and moving, whatever user chooses */
 	                    	event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 	                	}
-	                	if (target.getImage()!=square){
-		                	target.setImage(square);
-							target.setFitHeight(20);
-							target.setFitWidth(20);
-	                	}
+	                	
 
 	                	event.consume();
 	            	}
 	        	});
 			}
+			
+		
 			
 			for (Target target : targetArrayList) {
 				target.setOnDragDropped(new EventHandler <DragEvent>() {
@@ -309,12 +311,14 @@ public class Main extends Application {
 						/* let the source know whether the string was successfully 
 						 * transferred and used */
 						event.setDropCompleted(success);
-	                
 						event.consume();
 					}
 				});
 			}
 				
+			
+			
+			
 			
 			 ArrayList<Line> lines = new ArrayList<Line>();
 		
