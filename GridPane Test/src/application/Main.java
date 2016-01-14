@@ -105,9 +105,6 @@ public class Main extends Application {
 			int buffer = 70;
 			
 			for (int counterX = 0; counterX < GRID_SIZE ; counterX++) {
-				
-				targetArrayList.add(new Target(X+buffer*counterX, Y+buffer*counterX, square));
-				
 				for(int counterY = 0; counterY < GRID_SIZE ; counterY++){
 					
 					targetArrayList.add(new Target(X+buffer*counterY, Y+buffer*counterX, square));	 
