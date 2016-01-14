@@ -86,7 +86,7 @@ public class Main extends Application {
 	        label3.setLayoutX(150);
 			label3.setLayoutY(510);
 	        
-	        final Label label4 = new Label("10Ω");
+	        final Label label4 = new Label("10 Ohm");
 	        label4.setStyle("-fx-font: 15 'Times New Roman';");
 	        label4.setLayoutX(100);
 			label4.setLayoutY(130);
@@ -97,7 +97,7 @@ public class Main extends Application {
 	        textField2.setLayoutX(150);
 			textField2.setLayoutY(530);
 			
-			Button resistorSbmt = new Button("Submit Ω");
+			Button resistorSbmt = new Button("Submit Ohm");
 		    resistorSbmt.setStyle("-fx-font: 15 'Times New Roman';");
 		    resistorSbmt.setMaxWidth(80);
 		    resistorSbmt.setMaxHeight(12);
@@ -111,7 +111,7 @@ public class Main extends Application {
 		            if ((textField2.getText() != null && !textField2.getText().isEmpty())) {
 		                try{
 		                resistorVal = Integer.parseInt(textField2.getText());
-		                label4.setText(String.valueOf(resistorVal) + "Ω");
+		                label4.setText(String.valueOf(resistorVal) + " Ohm");
 		                currentVal = (float)batteryVal/resistorVal;
 		            
 		                }
@@ -162,7 +162,7 @@ public class Main extends Application {
 						
 						Tooltip.install(
 							    wire,
-							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
+							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +" Ohm" + "\n"+ currentVal + "A")
 							);
 						//wire.setStyle("-fx-base: #b6e7c9;");
 						
@@ -178,7 +178,7 @@ public class Main extends Application {
 				
 						Tooltip.install(
 							    wire,
-							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
+							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +" Ohm" + "\n"+ currentVal + "A")
 							);
 						//wire.setStyle("-fx-base: #b6e7c9;");
 						
