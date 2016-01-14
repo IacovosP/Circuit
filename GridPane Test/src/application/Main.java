@@ -97,7 +97,7 @@ public class Main extends Application {
 	        textField2.setLayoutX(150);
 			textField2.setLayoutY(530);
 			
-			Button resistorSbmt = new Button("Submit Ohm");
+			Button resistorSbmt = new Button("Submit R");
 		    resistorSbmt.setStyle("-fx-font: 15 'Times New Roman';");
 		    resistorSbmt.setMaxWidth(80);
 		    resistorSbmt.setMaxHeight(12);
@@ -160,11 +160,7 @@ public class Main extends Application {
 						else wire.setStyle("-fx-background-color: transparent;");
 						wire.toBack();
 						
-						Tooltip.install(
-							    wire,
-							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +" Ohm" + "\n"+ currentVal + "A")
-							);
-						//wire.setStyle("-fx-base: #b6e7c9;");
+						
 						
 					}
 				});
@@ -178,7 +174,7 @@ public class Main extends Application {
 				
 						Tooltip.install(
 							    wire,
-							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +" Ohm" + "\n"+ currentVal + "A")
+							    new Tooltip((batteryVal)+ "V" + "\nResistance of Components in circuit: "+ resistorVal +" Ohm" + "\n"+ currentVal + "A")
 							);
 						//wire.setStyle("-fx-base: #b6e7c9;");
 						
@@ -264,6 +260,12 @@ public class Main extends Application {
 		                //content.putString(source.getText());
 		                db.setContent(content);
 		                
+		                if (target.getImage()!=square){
+		                	target.setImage(square);
+							target.setFitHeight(20);
+							target.setFitWidth(20);
+	                	}
+		                
 		                event.consume();
 		            }
 		        });
@@ -281,11 +283,7 @@ public class Main extends Application {
 	                    	/* allow for both copying and moving, whatever user chooses */
 	                    	event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 	                	}
-	                	if (target.getImage()!=square){
-		                	target.setImage(square);
-							target.setFitHeight(20);
-							target.setFitWidth(20);
-	                	}
+	                	
 
 	                	event.consume();
 	            	}
