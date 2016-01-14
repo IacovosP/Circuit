@@ -22,8 +22,10 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-	public int batteryVal = 9, resistorVal = 10;
-	public float currentVal;
+	
+	private int batteryVal = 9, resistorVal = 10;
+	private float currentVal;
+	private Matrix matrix = new Matrix(36,36);
 	
 	@Override
 	public void start(Stage stage) {
@@ -77,8 +79,8 @@ public class Main extends Application {
 		            } else {
 		                textField.setText("Invalid input!");
 		            }
-		     }
-		 });
+		        }
+		    });
 			
 		    //Change resistors
 		    final Label label3 = new Label("Resistance");
@@ -123,12 +125,10 @@ public class Main extends Application {
 		            } else {
 		                textField2.setText("Invalid input!");
 		            }
-		     }
-		 });
+		        }
+		    });
 			
-			
-			
-			
+		    
 			ArrayList<Wire> wireArrayList = new ArrayList<Wire>();
 			//horizontal
 			wireArrayList.add(new Wire(247, 37, 3.1, 0.3));
@@ -150,11 +150,7 @@ public class Main extends Application {
 			for (Wire wire : wireArrayList) {
 				wire.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
-					
-						//wire.setVisible(true);
-						//if (wire.getStyle()=="-fx-base: #b6e7c9;")
-							//wire.setStyle(null);
-						//else wire.setStyle("-fx-base: #b6e7c9;");
+						
 						if (wire.getStyle()=="-fx-background-color: transparent;")
 							wire.setStyle("-fx-background-color: green;");
 						else wire.setStyle("-fx-background-color: transparent;");
@@ -164,14 +160,8 @@ public class Main extends Application {
 							    wire,
 							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
 							);
-						//wire.setStyle("-fx-base: #b6e7c9;");
-						
 					}
 				});
-			}
-			
-
-			for (Wire wire : wireArrayList) {
 				wire.setOnMouseEntered(new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e) {
 						currentVal = (float)batteryVal/resistorVal;
@@ -181,22 +171,22 @@ public class Main extends Application {
 							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
 							);
 						//wire.setStyle("-fx-base: #b6e7c9;");
-						
 					}
 				});
 			}
 			
+			
 			//set images here
-			Image image = new Image("application/battery.png", 60, 60, false, false);
-			Image resistor=new Image("application/resistor.jpg",60,60,false,false);
+			Image battery = new Image("application/battery.png", 60, 60, false, false);
+			Image resistor = new Image("application/resistor.jpg",60,60,false,false);
 			Image square = new Image("application/Empty+sqaure.jpg", 20, 20, false, false);
-			Image lamp=new Image("application/lamp.jpg",60,60,false,false);
-			Image voltmeter=new Image("application/Voltmeter.jpg",60,60,false,false);
-			Image ampermeter=new Image("application/IEC-Ampere-Meter-Symbol.jpg",60,60,false,false);
+			Image lamp = new Image("application/lamp.jpg",60,60,false,false);
+			Image voltmeter = new Image("application/Voltmeter.jpg",60,60,false,false);
+			Image ampermeter = new Image("application/IEC-Ampere-Meter-Symbol.jpg",60,60,false,false);
 			
 			ArrayList<Component> componentArrayList = new ArrayList<Component>();
 			//add component here
-			componentArrayList.add(new Component(30, 40, image));
+			componentArrayList.add(new Component(30, 40, battery));
 			componentArrayList.add(new Component(30, 120, resistor));
 			componentArrayList.add(new Component(30, 190, lamp));
 			componentArrayList.add(new Component(30, 270, voltmeter));
@@ -231,23 +221,12 @@ public class Main extends Application {
 			int buffer = 70;
 			
 			for (int counterX = 0; counterX < GRID_SIZE ; counterX++) {
-				for(int counterY = 0; counterY < GRID_SIZE ; counterY++){
+				for (int counterY = 0; counterY < GRID_SIZE ; counterY++){
 					
 					targetArrayList.add(new Target(X+buffer*counterY, Y+buffer*counterX, square));	 
-			}	
+				}	
 			}
 			
-			
-					
-		   /* targetArrayList.add(new Target(210, 42, square));
-			targetArrayList.add(new Target(280, 42, square));
-			targetArrayList.add(new Target(350, 42, square));
-			targetArrayList.add(new Target(210, 112, square));
-			targetArrayList.add(new Target(280, 112, square));
-			targetArrayList.add(new Target(350, 112, square));
-			targetArrayList.add(new Target(210, 182, square));
-			targetArrayList.add(new Target(280, 182, square));
-			targetArrayList.add(new Target(350, 182, square)); */
 			
 			
 			for (Target target : targetArrayList) {
@@ -267,8 +246,6 @@ public class Main extends Application {
 		                event.consume();
 		            }
 		        });
-	        }
-			for (Target target : targetArrayList) {
 				target.setOnDragOver(new EventHandler <DragEvent>() {
 	            	public void handle(DragEvent event) {
 	                	/* data is dragged over the target */
@@ -290,9 +267,6 @@ public class Main extends Application {
 	                	event.consume();
 	            	}
 	        	});
-			}
-			
-			for (Target target : targetArrayList) {
 				target.setOnDragDropped(new EventHandler <DragEvent>() {
 					public void handle(DragEvent event) {
 						/* data dropped */
@@ -313,11 +287,10 @@ public class Main extends Application {
 						event.consume();
 					}
 				});
-			}
-				
+	        }
 			
-			 ArrayList<Line> lines = new ArrayList<Line>();
-		
+			
+			ArrayList<Line> lines = new ArrayList<Line>();
 			
 			lines.add(new Line(220, 50, 220, 190));
 			lines.add(new Line(290, 50, 290, 190));
