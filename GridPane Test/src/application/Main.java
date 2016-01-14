@@ -47,10 +47,12 @@ public class Main extends Application {
 				wire.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						//wire.setVisible(true);
-						if (wire.getStyle()=="-fx-base: #b6e7c9;")
-							wire.setStyle(null);
-						else wire.setStyle("-fx-base: #b6e7c9;");
-						wire.setStyle("-fx-background-color: green;");
+						//if (wire.getStyle()=="-fx-base: #b6e7c9;")
+							//wire.setStyle(null);
+						//else wire.setStyle("-fx-base: #b6e7c9;");
+						if (wire.getStyle()=="-fx-background-color: transparent;")
+							wire.setStyle("-fx-background-color: green;");
+						else wire.setStyle("-fx-background-color: transparent;");
 						//wire.setStyle("-fx-base: #b6e7c9;");
 						
 					}
@@ -134,7 +136,12 @@ public class Main extends Application {
 	                    	/* allow for both copying and moving, whatever user chooses */
 	                    	event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 	                	}
-	                
+	                	if (target.getImage()!=square){
+		                	target.setImage(square);
+							target.setFitHeight(20);
+							target.setFitWidth(20);
+	                	}
+
 	                	event.consume();
 	            	}
 	        	});
