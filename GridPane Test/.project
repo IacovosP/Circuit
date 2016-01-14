@@ -20,4 +20,26 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/application/Empty+sqaure.jpg</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Desktop/Empty+sqaure.jpg</locationURI>
+		</link>
+		<link>
+			<name>src/application/IEC-Ampere-Meter-Symbol.jpg</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Desktop/IEC-Ampere-Meter-Symbol.jpg</locationURI>
+		</link>
+		<link>
+			<name>src/application/Voltmeter.jpg</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Desktop/Voltmeter.jpg</locationURI>
+		</link>
+		<link>
+			<name>src/application/resistor.png</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Desktop/resistor.png</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

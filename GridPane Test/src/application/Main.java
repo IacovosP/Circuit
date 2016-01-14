@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	
 	@Override
 	public void start(Stage stage) {
 		try {
@@ -62,14 +63,18 @@ public class Main extends Application {
 			//set images here
 			Image image = new Image("application/battery.png", 60, 60, false, false);
 			Image resistor=new Image("application/resistor.jpg",60,60,false,false);
-			Image square = new Image("application/square.png", 20, 20, false, false);
+			Image square = new Image("application/Empty+sqaure.jpg", 20, 20, false, false);
 			Image lamp=new Image("application/lamp.jpg",60,60,false,false);
+			Image voltmeter=new Image("application/Voltmeter.jpg",60,60,false,false);
+			Image ampermeter=new Image("application/IEC-Ampere-Meter-Symbol.jpg",60,60,false,false);
 			
 			ArrayList<Component> componentArrayList = new ArrayList<Component>();
 			//add component here
-			componentArrayList.add(new Component(30, 50, image));
-			componentArrayList.add(new Component(30, 110, resistor));
-			componentArrayList.add(new Component(30, 170, lamp));
+			componentArrayList.add(new Component(30, 40, image));
+			componentArrayList.add(new Component(30, 120, resistor));
+			componentArrayList.add(new Component(30, 190, lamp));
+			componentArrayList.add(new Component(30, 270, voltmeter));
+			componentArrayList.add(new Component(30, 350, ampermeter));
 			
 			
 			for (Component component : componentArrayList) {
@@ -94,7 +99,22 @@ public class Main extends Application {
 			
 			ArrayList<Target> targetArrayList = new ArrayList<Target>();
 			//add component here
-			targetArrayList.add(new Target(210, 42, square));
+			int GRID_SIZE = 6;
+			int X = 210;
+			int Y = 42;
+			int buffer = 70;
+			
+			for (int counterX = 0; counterX < GRID_SIZE ; counterX++) {
+				
+				targetArrayList.add(new Target(X+buffer*counterX, Y+buffer*counterX, square));
+				
+				for(int counterY = 0; counterY < GRID_SIZE ; counterY++){
+					
+					targetArrayList.add(new Target(X+buffer*counterY, Y+buffer*counterX, square));	 
+			}	
+			}
+					
+		   /* targetArrayList.add(new Target(210, 42, square));
 			targetArrayList.add(new Target(280, 42, square));
 			targetArrayList.add(new Target(350, 42, square));
 			targetArrayList.add(new Target(210, 112, square));
@@ -102,7 +122,7 @@ public class Main extends Application {
 			targetArrayList.add(new Target(350, 112, square));
 			targetArrayList.add(new Target(210, 182, square));
 			targetArrayList.add(new Target(280, 182, square));
-			targetArrayList.add(new Target(350, 182, square));
+			targetArrayList.add(new Target(350, 182, square)); */
 			
 			
 			for (Target target : targetArrayList) {
@@ -170,7 +190,10 @@ public class Main extends Application {
 				});
 			}
 				
-			ArrayList<Line> lines = new ArrayList<Line>();
+			
+			 ArrayList<Line> lines = new ArrayList<Line>();
+		
+			
 			lines.add(new Line(220, 50, 220, 190));
 			lines.add(new Line(290, 50, 290, 190));
 			lines.add(new Line(220, 120, 360, 120));
@@ -182,8 +205,8 @@ public class Main extends Application {
 	        //Rectangle target = new Rectangle(215,45,15,15);
 	        //target.setFill(Color.RED);
 	        //target.setStrokeWidth(3);
-	        
-	        
+	      
+	       
 	        root.getChildren().addAll(componentArrayList);
 	        root.getChildren().addAll(lines);
 	        root.getChildren().addAll(targetArrayList);
