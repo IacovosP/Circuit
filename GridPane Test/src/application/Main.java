@@ -8,6 +8,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -19,21 +22,121 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	public int batteryVal = 9, resistorVal = 10;
+	public float currentVal;
 	
 	@Override
 	public void start(Stage stage) {
 		try {
 			Group root = new Group();
-			Scene scene = new Scene(root,680,440);
+			Scene scene = new Scene(root,680,640);
+			
+			//Buttons to submit/edit da components
+			
+
+	        // Change Battery Voltage
+	        final Label label1 = new Label("Voltage");
+	        label1.setStyle("-fx-font: 15 'Times New Roman'; -fx-font-weight: bold;");
+	        label1.setLayoutX(30);
+			label1.setLayoutY(510);
+	        
+	        final Label label2 = new Label("9V");
+	        label2.setStyle("-fx-font: 15 'Times New Roman';");
+	        label2.setLayoutX(100);
+			label2.setLayoutY(70);
+	        
+	        
+	        TextField textField = new TextField ("9");
+	        textField.setMaxWidth(80);
+	        textField.setLayoutX(30);
+			textField.setLayoutY(530);
+			
+			Button batterySbmt = new Button("Submit V");
+		    batterySbmt.setStyle("-fx-font: 15 'Times New Roman';");
+		    batterySbmt.setMaxWidth(80);
+		    batterySbmt.setMaxHeight(12);
+		    batterySbmt.setLayoutX(30);
+		    batterySbmt.setLayoutY(560);
+		    
+		    batterySbmt.setOnAction(new EventHandler<ActionEvent>() {
+
+		        @Override
+		        public void handle(ActionEvent e) {
+		            if ((textField.getText() != null && !textField.getText().isEmpty())) {
+		                try{
+		                batteryVal = Integer.parseInt(textField.getText());
+		                label2.setText(String.valueOf(batteryVal) + "V");
+		                currentVal = (float)batteryVal/resistorVal;
+		            
+		                }
+		                catch (NumberFormatException nfe){
+		                textField.setText("Invalid input!");
+		                batteryVal = 9;
+		                }    
+		                System.out.println(batteryVal);
+		            } else {
+		                textField.setText("Invalid input!");
+		            }
+		     }
+		 });
+			
+		    //Change resistors
+		    final Label label3 = new Label("Resistance");
+	        label3.setStyle("-fx-font: 15 'Times New Roman'; -fx-font-weight: bold;");
+	        label3.setLayoutX(150);
+			label3.setLayoutY(510);
+	        
+	        final Label label4 = new Label("10Ω");
+	        label4.setStyle("-fx-font: 15 'Times New Roman';");
+	        label4.setLayoutX(100);
+			label4.setLayoutY(130);
+	        
+	        
+	        TextField textField2 = new TextField ("10");
+	        textField2.setMaxWidth(80);
+	        textField2.setLayoutX(150);
+			textField2.setLayoutY(530);
+			
+			Button resistorSbmt = new Button("Submit Ω");
+		    resistorSbmt.setStyle("-fx-font: 15 'Times New Roman';");
+		    resistorSbmt.setMaxWidth(80);
+		    resistorSbmt.setMaxHeight(12);
+		    resistorSbmt.setLayoutX(150);
+		    resistorSbmt.setLayoutY(560);
+		    
+		    resistorSbmt.setOnAction(new EventHandler<ActionEvent>() {
+
+		        @Override
+		        public void handle(ActionEvent e) {
+		            if ((textField2.getText() != null && !textField2.getText().isEmpty())) {
+		                try{
+		                resistorVal = Integer.parseInt(textField2.getText());
+		                label4.setText(String.valueOf(resistorVal) + "Ω");
+		                currentVal = (float)batteryVal/resistorVal;
+		            
+		                }
+		                catch (NumberFormatException nfe){
+		                textField2.setText("Invalid input!");
+		                resistorVal = 10;
+		                }    
+		                System.out.println(resistorVal);
+		            } else {
+		                textField2.setText("Invalid input!");
+		            }
+		     }
+		 });
+			
+			
+			
 			
 			ArrayList<Wire> wireArrayList = new ArrayList<Wire>();
 			//horizontal
-			wireArrayList.add(new Wire(247, 40, 3.1, 0.3));
-			wireArrayList.add(new Wire(317, 40, 3.1, 0.3));
-			wireArrayList.add(new Wire(247, 110, 3.1, 0.3));
-			wireArrayList.add(new Wire(317, 110, 3.1, 0.3));
-			wireArrayList.add(new Wire(247, 180, 3.1, 0.3));
-			wireArrayList.add(new Wire(317, 180, 3.1, 0.3));
+			wireArrayList.add(new Wire(247, 37, 3.1, 0.3));
+			wireArrayList.add(new Wire(317, 37, 3.1, 0.3));
+			wireArrayList.add(new Wire(247, 107, 3.1, 0.3));
+			wireArrayList.add(new Wire(317, 107, 3.1, 0.3));
+			wireArrayList.add(new Wire(247, 177, 3.1, 0.3));
+			wireArrayList.add(new Wire(317, 177, 3.1, 0.3));
 			//vertical
 			wireArrayList.add(new Wire(212, 74, 0.4, 2.0));
 			wireArrayList.add(new Wire(282, 74, 0.4, 2.0));
@@ -47,6 +150,7 @@ public class Main extends Application {
 			for (Wire wire : wireArrayList) {
 				wire.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
+					
 						//wire.setVisible(true);
 						//if (wire.getStyle()=="-fx-base: #b6e7c9;")
 							//wire.setStyle(null);
@@ -55,7 +159,29 @@ public class Main extends Application {
 							wire.setStyle("-fx-background-color: green;");
 						else wire.setStyle("-fx-background-color: transparent;");
 						wire.toBack();
+						
+						Tooltip.install(
+							    wire,
+							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
+							);
 						//wire.setStyle("-fx-base: #b6e7c9;");
+						
+					}
+				});
+			}
+			
+
+			for (Wire wire : wireArrayList) {
+				wire.setOnMouseEntered(new EventHandler<MouseEvent>(){
+					@Override public void handle(MouseEvent e) {
+						currentVal = (float)batteryVal/resistorVal;
+				
+						Tooltip.install(
+							    wire,
+							    new Tooltip((batteryVal)+ "V" + "\n"+ resistorVal +"Ω" + "\n"+ currentVal + "A")
+							);
+						//wire.setStyle("-fx-base: #b6e7c9;");
+						
 					}
 				});
 			}
@@ -210,6 +336,14 @@ public class Main extends Application {
 	        root.getChildren().addAll(lines);
 	        root.getChildren().addAll(targetArrayList);
 	        root.getChildren().addAll(wireArrayList);
+	        root.getChildren().add(batterySbmt);
+	        root.getChildren().add(textField);
+	        root.getChildren().add(label2);
+	        root.getChildren().add(label1);
+	        root.getChildren().add(resistorSbmt);
+	        root.getChildren().add(textField2);
+	        root.getChildren().add(label3);
+	        root.getChildren().add(label4);
 	        stage.setScene(scene);
 			stage.show();
 			
