@@ -54,6 +54,7 @@ public class Main extends Application {
 						if (wire.getStyle()=="-fx-background-color: transparent;")
 							wire.setStyle("-fx-background-color: green;");
 						else wire.setStyle("-fx-background-color: transparent;");
+						wire.toBack();
 						//wire.setStyle("-fx-base: #b6e7c9;");
 						
 					}
@@ -110,6 +111,8 @@ public class Main extends Application {
 					targetArrayList.add(new Target(X+buffer*counterY, Y+buffer*counterX, square));	 
 			}	
 			}
+			
+			
 					
 		   /* targetArrayList.add(new Target(210, 42, square));
 			targetArrayList.add(new Target(280, 42, square));

@@ -20,21 +20,4 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/application/Empty+sqaure.jpg</name>
-			<type>1</type>
-			<location>C:/Users/Ivan/git/CircuitMaster/GridPane Test/src/application/Empty+sqaure.jpg</location>
-		</link>
-		<link>
-			<name>src/application/IEC-Ampere-Meter-Symbol.jpg</name>
-			<type>1</type>
-			<location>C:/Users/Ivan/git/CircuitMaster/GridPane Test/src/application/IEC-Ampere-Meter-Symbol.jpg</location>
-		</link>
-		<link>
-			<name>src/application/Voltmeter.jpg</name>
-			<type>1</type>
-			<location>C:/Users/Ivan/git/CircuitMaster/GridPane Test/src/application/Voltmeter.jpg</location>
-		</link>
-	</linkedResources>
 </projectDescription>
