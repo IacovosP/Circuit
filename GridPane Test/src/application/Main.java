@@ -170,14 +170,13 @@ public class Main extends Application {
 			lines.add(new Line(220, 331.5, 580, 331.5));
 			lines.add(new Line(220, 401.5, 580, 401.5));
 			
-			
 			ArrayList<Wire> wireArrayList = new ArrayList<Wire>();
-			int startHX = 247, startHY = 38, startVX = 211, startVY = 74, wireDist = 70;
+			int startHX = 246, startHY = 38, startVX = 211, startVY = 73, wireDist = 70;
 			
 			for (int i = 0; i < GRID_SIZE; i ++) 
 				for (int j = 0; j < GRID_SIZE; j ++) {
-					wireArrayList.add(new Wire(startHX+wireDist*i,startHY+wireDist*j,3.1,0.3,(i-1)*GRID_SIZE+j+1,(i-1)*GRID_SIZE+j,matrix)); //horizontal lines
-					wireArrayList.add(new Wire(startVX+wireDist*i,startVY+wireDist*j,0.4,2.0,i*GRID_SIZE+j,(i-1)*GRID_SIZE+j,matrix)); //vertical lines
+					wireArrayList.add(new Wire(startHX+wireDist*i,startHY+wireDist*j,2.8,0.3,(i-1)*GRID_SIZE+j+1,(i-1)*GRID_SIZE+j,matrix)); //horizontal lines
+					wireArrayList.add(new Wire(startVX+wireDist*i,startVY+wireDist*j,0.4,1.9,i*GRID_SIZE+j,(i-1)*GRID_SIZE+j,matrix)); //vertical lines
 				} 
 
 			for (Wire wire : wireArrayList) {
@@ -193,8 +192,7 @@ public class Main extends Application {
 						} catch (MatrixException e1) {
 							e1.printStackTrace();
 						}
-						wire.toFront();
-								
+						
 					}
 				});
 				
@@ -257,7 +255,7 @@ public class Main extends Application {
 			for (int counterX = 0; counterX < GRID_SIZE ; counterX++) {
 				for (int counterY = 0; counterY < GRID_SIZE ; counterY++) {
 					
-					targetArrayList.add(new Target(X+buffer*counterY, Y+buffer*counterX, square));	 
+					targetArrayList.add(new Target(X+buffer*counterY, Y+buffer*counterX, square));
 				}	
 			}
 			
