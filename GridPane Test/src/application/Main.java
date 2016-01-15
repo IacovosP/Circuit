@@ -172,11 +172,13 @@ public class Main extends Application {
 				wire.setOnMouseEntered(new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e) {
 						currentVal = (float)batteryVal/resistorVal;
-				
+						if (wire.getStyle()==("-fx-background-color: green;")){
 						Tooltip.install(
 							    wire,
 							    new Tooltip((batteryVal)+ "V" + "\nResistance of Components in circuit: "+ resistorVal +" Ohm" + "\n"+ currentVal + "A")
 						);
+						}
+					
 					}
 				});
 			}
@@ -208,10 +210,10 @@ public class Main extends Application {
 		                /* allow any transfer mode */
 		                Dragboard db = component.startDragAndDrop(TransferMode.ANY);
 		                
-		                /* put a string on dragboard */
+		                /* put an image on dragboard */
 		                ClipboardContent content = new ClipboardContent();
 		                content.putImage(component.getImage());
-		                //content.putString(source.getText());
+		               
 		                db.setContent(content);
 		                
 		                event.consume();
@@ -240,16 +242,18 @@ public class Main extends Application {
 		                /* allow any transfer mode */
 		                Dragboard db = target.startDragAndDrop(TransferMode.ANY);
 		                
-		                /* put a string on dragboard */
+		                /* put an image on dragboard */
 		                ClipboardContent content = new ClipboardContent();
 		                content.putImage(target.getImage());
-		                //content.putString(source.getText());
+		          
 		                db.setContent(content);
 		                
 		                if (target.getImage()!=square){
 		                	target.setImage(square);
 							target.setFitHeight(20);
 							target.setFitWidth(20);
+							
+							
 	                	}
 		                
 		                event.consume();
@@ -261,7 +265,7 @@ public class Main extends Application {
 	                	System.out.println("onDragOver");
 	                
 	                	/* accept it only if it is  not dragged from the same node 
-	                 	* and if it has a string data */
+	                 	* and if it has a image */
 	                	if (event.getGestureSource() != target &&
 	                        	event.getDragboard().hasImage()) {
 	                    	/* allow for both copying and moving, whatever user chooses */
@@ -276,16 +280,22 @@ public class Main extends Application {
 					public void handle(DragEvent event) {
 						/* data dropped */
 						System.out.println("onDragDropped");
-						/* if there is a string data on dragboard, read it and use it */
+						/* if there is an image on dragboard, read it and use it */
 						Dragboard db = event.getDragboard();
 						boolean success = false;
+						if (target.getImage()!=square){
+							target.setLayoutX(target.getLayoutX()+5);
+							target.setLayoutY(target.getLayoutY()+5);
+						}
 						if (db.hasImage()) {
 							target.setImage(db.getImage());
 							target.setFitHeight(30);
 							target.setFitWidth(30);
+							target.setLayoutX(target.getLayoutX()-5);
+							target.setLayoutY(target.getLayoutY()-5);
 							success = true;
 						}
-						/* let the source know whether the string was successfully 
+						/* let the source know whether was successfully 
 						 * transferred and used */
 						event.setDropCompleted(success);
 	                
