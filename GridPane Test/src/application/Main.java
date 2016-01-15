@@ -213,11 +213,11 @@ public class Main extends Application {
 			
 			//set images here
 			Image image = new Image("application/battery.png", 60, 60, false, false);
-			Image resistor=new Image("application/resistor.jpg",60,60,false,false);
+			Image resistor=new Image("application/resistor.png",60,60,false,false);
 			Image square = new Image("application/Empty+sqaure.jpg", 20, 20, false, false);
-			Image lamp=new Image("application/lamp.jpg",60,60,false,false);
-			Image voltmeter=new Image("application/Voltmeter.jpg",60,60,false,false);
-			Image ampermeter=new Image("application/IEC-Ampere-Meter-Symbol.jpg",60,60,false,false);
+			Image lamp=new Image("application/lamp.png",60,60,false,false);
+			Image voltmeter=new Image("application/Voltmeter.png",60,60,false,false);
+			Image ampermeter=new Image("application/IEC-Ampere-Meter-Symbol.png",60,60,false,false);
 			
 			ArrayList<Component> componentArrayList = new ArrayList<Component>();
 			//add component here
