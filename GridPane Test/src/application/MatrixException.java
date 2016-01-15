@@ -1,13 +1,5 @@
 package application;
 
-/**
- * Exception subclass to represent exceptions thrown when working with matrix
- * objects. Copyright (c) 2015 UCL Computer Science
- * 
- * @author Graham Roberts
- * @version 1.1
- */
-
 public class MatrixException extends Exception
 {
   /**

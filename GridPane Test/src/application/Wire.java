@@ -19,11 +19,11 @@ public class Wire extends Button{
 	
 	public Wire(int x, int y, double scalex, double scaley, int node1, int node2, Matrix matrix) {
 		
-        this.setScaleX(scalex);
+		this.setStyle("-fx-background-color: transparent;");
+		this.setScaleX(scalex);
         this.setScaleY(scaley);
 		this.setLayoutX(x);
 		this.setLayoutY(y);
-		this.setStyle("-fx-background-color: transparent;");
 		this.node1 = node1;
 		this.node2 = node2;
 		this.matrix = matrix;

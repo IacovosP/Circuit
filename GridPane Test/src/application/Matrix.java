@@ -16,8 +16,6 @@ public class Matrix {
 	    hashvalue = ((x +"") + (y + "")).hashCode();
 	  }
 	  
-	  // Override equals and hashcode to ensure Index objects
-	  // behave correctly when used as keys in a hash table.
 	  
 	  @Override
 	  public boolean equals(final Object obj)

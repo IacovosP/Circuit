@@ -31,6 +31,7 @@ public class Main extends Application {
 			int GRID_SIZE = 6;
 			Group root = new Group();
 			Scene scene = new Scene(root,680,640);
+			stage.setTitle("Circuit Simulator v2.3");
 			Matrix matrix = new Matrix(GRID_SIZE, GRID_SIZE);
 	
 
@@ -150,25 +151,7 @@ public class Main extends Application {
 		            
 		        }
 		    });
-		    
-		    
-		    
-		    
-		    
-			ArrayList<Line> lines = new ArrayList<Line>();
-			
-			lines.add(new Line(220, 50, 220, 410));
-			lines.add(new Line(290, 50, 290, 410));
-			lines.add(new Line(360, 50, 360, 410));
-			lines.add(new Line(430, 50, 430, 410));
-			lines.add(new Line(500, 50, 500, 410));
-			lines.add(new Line(570, 50, 570, 410));
-			lines.add(new Line(220, 51.5, 580, 51.5));
-			lines.add(new Line(220, 121.5, 580, 121.5));
-			lines.add(new Line(220, 191.5, 580, 191.5));
-			lines.add(new Line(220, 261.5, 580, 261.5));
-			lines.add(new Line(220, 331.5, 580, 331.5));
-			lines.add(new Line(220, 401.5, 580, 401.5));
+    
 			
 			ArrayList<Wire> wireArrayList = new ArrayList<Wire>();
 			int startHX = 246, startHY = 38, startVX = 211, startVY = 73, wireDist = 70;
@@ -192,7 +175,7 @@ public class Main extends Application {
 						} catch (MatrixException e1) {
 							e1.printStackTrace();
 						}
-						
+						//wire.toBack();
 					}
 				});
 				
@@ -211,17 +194,34 @@ public class Main extends Application {
 			}
 			
 			
+			ArrayList<Line> lineArrayList = new ArrayList<Line>();
+			
+			lineArrayList.add(new Line(220, 50, 220, 410));
+			lineArrayList.add(new Line(290, 50, 290, 410));
+			lineArrayList.add(new Line(360, 50, 360, 410));
+			lineArrayList.add(new Line(430, 50, 430, 410));
+			lineArrayList.add(new Line(500, 50, 500, 410));
+			lineArrayList.add(new Line(570, 50, 570, 410));
+			lineArrayList.add(new Line(220, 51.5, 580, 51.5));
+			lineArrayList.add(new Line(220, 121.5, 580, 121.5));
+			lineArrayList.add(new Line(220, 191.5, 580, 191.5));
+			lineArrayList.add(new Line(220, 261.5, 580, 261.5));
+			lineArrayList.add(new Line(220, 331.5, 580, 331.5));
+			lineArrayList.add(new Line(220, 401.5, 580, 401.5));
+			
+			
 			//set images here
-			Image image = new Image("application/battery.png", 60, 60, false, false);
+
+			Image battery = new Image("application/battery.png", 60, 60, false, false);
 			Image resistor=new Image("application/resistor.png",60,60,false,false);
-			Image square = new Image("application/Empty+sqaure.jpg", 20, 20, false, false);
+			Image square = new Image("application/Empty+square.jpg", 20, 20, false, false);
 			Image lamp=new Image("application/lamp.png",60,60,false,false);
 			Image voltmeter=new Image("application/Voltmeter.png",60,60,false,false);
 			Image ampermeter=new Image("application/IEC-Ampere-Meter-Symbol.png",60,60,false,false);
 			
 			ArrayList<Component> componentArrayList = new ArrayList<Component>();
 			//add component here
-			componentArrayList.add(new Component(30, 40, image));
+			componentArrayList.add(new Component(30, 40, battery));
 			componentArrayList.add(new Component(30, 120, resistor));
 			componentArrayList.add(new Component(30, 190, lamp));
 			componentArrayList.add(new Component(30, 270, voltmeter));
@@ -333,7 +333,7 @@ public class Main extends Application {
 			
 	       
 	        root.getChildren().addAll(componentArrayList);
-	        root.getChildren().addAll(lines);
+	        root.getChildren().addAll(lineArrayList);
 	        root.getChildren().addAll(targetArrayList);
 	        root.getChildren().addAll(wireArrayList);
 	        root.getChildren().add(batterySbmt);
