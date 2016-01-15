@@ -127,7 +127,34 @@ public class Main extends Application {
 		        }
 		    });
 			
+		    /////Load
+		    
+		    Button load = new Button("load");
+		    
+		    load.setOnAction(new EventHandler<ActionEvent>() {
 
+		        @Override
+		        public void handle(ActionEvent e) {
+		            
+		        }
+		    });
+		    
+		    ////Save
+		    
+		    Button save = new Button("save");
+		    save.setLayoutX(50);
+		    save.setOnAction(new EventHandler<ActionEvent>() {
+		    	
+		        @Override
+		        public void handle(ActionEvent e) {
+		            
+		        }
+		    });
+		    
+		    
+		    
+		    
+		    
 			ArrayList<Line> lines = new ArrayList<Line>();
 			
 			lines.add(new Line(220, 50, 220, 410));
@@ -169,13 +196,14 @@ public class Main extends Application {
 						wire.toBack();			
 					}
 				});
+				
 				wire.setOnMouseEntered(new EventHandler<MouseEvent>(){
 					@Override public void handle(MouseEvent e) {
 						currentVal = (float)batteryVal/resistorVal;
 						if (wire.getStyle()==("-fx-background-color: green;")){
 						Tooltip.install(
 							    wire,
-							    new Tooltip((batteryVal)+ "V" + "\nResistance of Components in circuit: "+ resistorVal +" Ohm" + "\n"+ currentVal + "A")
+							    new Tooltip((batteryVal)+ "V" + "\n"+ currentVal + "A")
 						);
 						}
 					
@@ -317,6 +345,8 @@ public class Main extends Application {
 	        root.getChildren().add(textField2);
 	        root.getChildren().add(label3);
 	        root.getChildren().add(label4);
+	        root.getChildren().add(load);
+	        root.getChildren().add(save);
 	        stage.setScene(scene);
 			stage.show();
 			
