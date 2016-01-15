@@ -183,6 +183,7 @@ public class Main extends Application {
 			for (Wire wire : wireArrayList) {
 				wire.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
+						
 						if (wire.getStyle()=="-fx-background-color: transparent;")
 							wire.setStyle("-fx-background-color: green;");
 						else wire.setStyle("-fx-background-color: transparent;");
@@ -192,8 +193,8 @@ public class Main extends Application {
 						} catch (MatrixException e1) {
 							e1.printStackTrace();
 						}
-						
-						wire.toBack();			
+						wire.toFront();
+								
 					}
 				});
 				
