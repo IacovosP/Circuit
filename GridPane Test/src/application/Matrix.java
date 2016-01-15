@@ -81,6 +81,7 @@ public class Matrix {
 	  }
 	  if (value != 0.0) {
 		  hashTable.put(new Index(row,column), (Double)value);
+		  hashTable.put(new Index(column,row), (Double)value);
 	  }
 	  else {
 		  hashTable.remove(new Index(row,column));
