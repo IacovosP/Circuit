@@ -252,8 +252,8 @@ public class Main extends Application {
 		                	target.setImage(square);
 							target.setFitHeight(20);
 							target.setFitWidth(20);
-							
-							
+							target.setLayoutX(target.getLayoutX()+5);
+							target.setLayoutY(target.getLayoutY()+5);
 	                	}
 		                
 		                event.consume();
