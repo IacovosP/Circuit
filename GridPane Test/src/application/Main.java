@@ -1,6 +1,28 @@
 package application;
-	
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,15 +31,18 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -36,6 +61,12 @@ public class Main extends Application {
 	
 
 			//Buttons to submit/edit da components
+		    TextArea textArea = new TextArea();
+		    textArea.setMaxHeight(150);
+		    textArea.setMaxWidth(300);
+		    textArea.setLayoutX(250);
+			textArea.setLayoutY(430);
+			textArea.setText("Import/Export Values");
 			
 	        // Change Battery Voltage
 	        final Label label1 = new Label("Voltage");
@@ -128,7 +159,6 @@ public class Main extends Application {
 		        }
 		    });
 			
-		    /* /////Load
 		    
 		    Button load = new Button("load");
 		    
@@ -136,7 +166,23 @@ public class Main extends Application {
 
 		        @Override
 		        public void handle(ActionEvent e) {
-		            
+		        	
+	                try {
+	                	FileChooser fileChooser = new FileChooser();
+		                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+		                fileChooser.getExtensionFilters().add(extFilter);
+		                File file = fileChooser.showOpenDialog(stage);
+	        	        Scanner s = new Scanner(file).useDelimiter("\\s+");
+	        	        while (s.hasNext()) {
+	        	            if (s.hasNextInt()) { // check if next token is an int
+	        	                textArea.appendText(s.nextInt() + " "); // display the found integer
+	        	            } else {
+	        	               textArea.appendText(s.next() + " "); // else read the next token
+	        	            }
+	        	        }
+	        	    } catch (FileNotFoundException ex) {
+	        	        System.err.println(ex);
+	        	    }
 		        }
 		    });
 		    
@@ -144,13 +190,34 @@ public class Main extends Application {
 		    
 		    Button save = new Button("save");
 		    save.setLayoutX(50);
+		    
+		    		    
+		    
 		    save.setOnAction(new EventHandler<ActionEvent>() {
 		    	
 		        @Override
 		        public void handle(ActionEvent e) {
-		            
+		        	FileChooser fileChooser = new FileChooser();
+		             
+		            //Set extension filter
+		            FileChooser.ExtensionFilter extFilter = 
+		                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+		            fileChooser.getExtensionFilters().add(extFilter);
+		             
+		            //Show save file dialog
+		           
+		             
+		            try (BufferedWriter bw = new BufferedWriter(new FileWriter("users.txt", true))) {
+		                bw.write(textArea.getText());
+		                bw.newLine();
+		                bw.write(textArea.getText());
+		                bw.newLine();
+		            } catch (IOException f) {
+		                f.printStackTrace();
+
+		            }
 		        }
-		    }); */
+		    });
 		    
 		    
 		    ArrayList<Line> lineArrayList = new ArrayList<Line>();
@@ -168,7 +235,8 @@ public class Main extends Application {
 			lineArrayList.add(new Line(220, 331.5, 580, 331.5));
 			lineArrayList.add(new Line(220, 401.5, 580, 401.5));
 			
-			
+		    
+
 			ArrayList<Wire> wireArrayList = new ArrayList<Wire>();
 			int startHX = 247, startHY = 38, startVX = 211, startVY = 74, wireDist = 70;
 			
@@ -213,12 +281,12 @@ public class Main extends Application {
 			
 			//set images here
 
-			Image battery = new Image("application/battery.png", 60, 60, false, false);
-			Image resistor=new Image("application/resistor.png",60,60,false,false);
-			Image square = new Image("application/Empty+square.jpg", 20, 20, false, false);
-			Image lamp=new Image("application/lamp.png",60,60,false,false);
-			Image voltmeter=new Image("application/Voltmeter.png",60,60,false,false);
-			Image ampermeter=new Image("application/IEC-Ampere-Meter-Symbol.png",60,60,false,false);
+			Image battery = new Image("application/assets/battery.png", 60, 60, false, false);
+			Image resistor=new Image("application/assets/resistor.png",60,60,false,false);
+			Image square = new Image("application/assets/Empty+square.jpg", 20, 20, false, false);
+			Image lamp=new Image("application/assets/lamp.png",60,60,false,false);
+			Image voltmeter=new Image("application/assets/Voltmeter.png",60,60,false,false);
+			Image ampermeter=new Image("application/assets/IEC-Ampere-Meter-Symbol.png",60,60,false,false);
 			
 			ArrayList<Component> componentArrayList = new ArrayList<Component>();
 			//add component here
@@ -345,8 +413,10 @@ public class Main extends Application {
 	        root.getChildren().add(textField2);
 	        root.getChildren().add(label3);
 	        root.getChildren().add(label4);
-	        //root.getChildren().add(load);
-	        //root.getChildren().add(save);
+	        root.getChildren().add(load);
+	        root.getChildren().add(save);
+	        root.getChildren().add(textArea); 
+	        
 	        stage.setScene(scene);
 			stage.show();
 			

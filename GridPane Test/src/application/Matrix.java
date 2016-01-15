@@ -9,8 +9,7 @@ public class Matrix {
 		private int hashvalue = 0;
 
 
-		public Index(final int x, final int y)
-		{
+		public Index(final int x, final int y) {
 			this.x = x;
 			this.y = y;
 			hashvalue = ((x +"") + (y + "")).hashCode();
@@ -18,8 +17,7 @@ public class Matrix {
 
 
 		@Override
-		public boolean equals(final Object obj)
-		{
+		public boolean equals(final Object obj) {
 			if (obj instanceof Index)
 			{
 				Index index = (Index) obj;
@@ -32,8 +30,7 @@ public class Matrix {
 		}
 
 		@Override
-		public int hashCode()
-		{
+		public int hashCode() {
 			return hashvalue;
 		}
 	}
@@ -43,27 +40,22 @@ public class Matrix {
 	private int rows, columns, num, component;
 	private int visited[] = new int[36];
 
-	public Matrix(final int rows, final int columns) 
-	{
+	public Matrix(final int rows, final int columns) {
 		hashTable = new HashMap<Index,Double>();
 		components = new HashMap<Integer,Integer>();
 		this.rows = rows;
 		this.columns = columns;
 	}
 
-	public int getNumberOfRows()
-	{
+	public int getNumberOfRows() {
 		return rows;
 	}
 
-	public int getNumberOfColumns()
-	{
+	public int getNumberOfColumns() {
 		return columns;
 	}
 
-	public double getElement(final int row, final int column) 
-			throws MatrixException
-	{
+	public double getElement(final int row, final int column) throws MatrixException {
 		if (row < 0 || row >= getNumberOfRows() || column < 0 || column >= getNumberOfColumns()) {
 			throw new MatrixException(row, column);
 		}
@@ -74,9 +66,7 @@ public class Matrix {
 			return 0.0;
 	}
 
-	public void setElement(final int row, final int column, final double value)
-			throws MatrixException
-	{
+	public void setElement(final int row, final int column, final double value) throws MatrixException {
 		if (row < 0 || row >= getNumberOfRows() || column < 0 || column >= getNumberOfColumns()) {
 			throw new MatrixException(row, column);
 		}
@@ -89,9 +79,7 @@ public class Matrix {
 		}
 	} 
 
-	public void findConnectedComponents() 
-			throws MatrixException 
-	{
+	public void findConnectedComponents() throws MatrixException {
 		for (int i=0; i<36; i++) 
 			if (visited[i] == 0) {
 				depthFirstSearch(i, component);
@@ -99,9 +87,7 @@ public class Matrix {
 			}
 	}
 	
-	private void depthFirstSearch(int n, int component) 
-			throws MatrixException 
-	{
+	private void depthFirstSearch(int n, int component) throws MatrixException {
 		components.put(component, n);
 		for (int i=0; i<6; i++) {
 			if (getElement(n,i) == 1 && visited[n] == 0)
